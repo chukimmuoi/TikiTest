@@ -1,0 +1,3 @@
+include ':mbase'
+include ':app'
+rootProject.name = "TikiTest"

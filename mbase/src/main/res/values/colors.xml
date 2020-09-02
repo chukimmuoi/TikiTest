@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--SWIPE REFRESH-->
+    <color name="colorSwipeBlue">#FF00DDFF</color>
+    <color name="colorSwipeGreen">#FF99CC00</color>
+    <color name="colorSwipeOrange">#FFFFBB33</color>
+    <color name="colorSwipeRed">#FFFF4444</color>
+</resources>

@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "com.chukimuoi.tikitest"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // support use image vector.
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        applicationVariants.all { variant ->
+            configApkFileName(variant, defaultConfig)
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project (':mbase')
+
+    implementation "androidx.room:room-runtime:$rootProject.room_version"
+    kapt "androidx.room:room-compiler:$rootProject.room_version"
+    implementation "androidx.room:room-rxjava2:$rootProject.room_version"
+
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycle_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+
+    implementation "com.google.dagger:dagger:$rootProject.dagger2_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2_version"
+    compileOnly "org.glassfish:javax.annotation:3.1.1"
+
+    kapt "com.android.databinding:compiler:$rootProject.data_binding_version"
+
+    implementation "com.facebook.stetho:stetho:$rootProject.stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho_version"
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+
+    implementation "pub.devrel:easypermissions:$rootProject.permissions_version"
+
+    implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
+
+}
+
+def configApkFileName(variant, defaultConfig) {
+    variant.outputs.all { output ->
+        if (variant.buildType.name == android.buildTypes.release.name) {
+            outputFileName = "TikiTest(" + defaultConfig.versionCode + "_" + defaultConfig.versionName + ").apk"
+        } else {
+            outputFileName = "TikiTest(" + defaultConfig.versionCode + "_" + defaultConfig.versionName + ").apk"
+        }
+    }
+}

@@ -1,0 +1,75 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlin_version = '1.3.72'
+
+        multidex_version = '2.0.1'
+
+        android_support_version = "28.0.0" //https://developer.android.com/topic/libraries/support-library/packages
+
+        swipe_version              = "1.0.0" //https://developer.android.com/jetpack/androidx/releases/swiperefreshlayout
+        recycle_version            = "1.1.0" //https://developer.android.com/jetpack/androidx/releases/recyclerviewre
+        progressbar_version        = "2.0.3" //https://github.com/akexorcist/Android-RoundCornerProgressBar
+        circle_progressbar_version = "1.0.4" //https://github.com/yankai-victor/Loading
+
+        adapter_delegate_version = '4.3.0' //https://github.com/sockeqwe/AdapterDelegates
+        recycle_gravity_version   = "2.2.0" //https://github.com/rubensousa/GravitySnapHelper
+        toast_version             = "1.1.0" //https://github.com/PureWriter/ToastCompat
+        constraint_layout_version = "1.1.3" //https://developer.android.com/jetpack/androidx/releases/constraintlayout
+
+        log_version          = "4.7.1" //https://github.com/JakeWharton/timber
+        gson_version         = "2.8.6" //https://github.com/google/gson
+        room_version         = '2.2.4' //https://developer.android.com/jetpack/androidx/releases/room
+        lifecycle_version    = "2.1.0" //https://developer.android.com/jetpack/androidx/releases/lifecycle
+        retrofit_version     = '2.7.1' //https://square.github.io/retrofit/ and https://github.com/square/retrofit
+        dagger2_version      = '2.26' //https://github.com/google/dagger
+        rx_java_version      = '3.0.0-RC6' //https://github.com/ReactiveX/RxJava
+        rx_android_version   = '2.1.1' //https://github.com/ReactiveX/RxAndroid
+        rx_kotlin_version    = '2.4.0' //https://github.com/ReactiveX/RxKotlin
+        rx_binding_version   = "3.1.0" //https://github.com/JakeWharton/RxBinding
+        data_binding_version = '3.1.4'
+        stetho_version       = '1.5.1' //http://facebook.github.io/stetho/
+
+        glide_version        = "4.11.0" //https://github.com/bumptech/glide
+
+        permissions_version  = "3.0.0" //https://github.com/googlesamples/easypermissions
+
+        eventbus_version = "3.2.0" //https://github.com/greenrobot/EventBus
+
+        play_service_gcm_version   = "17.0.0" //https://developers.google.com/android/guides/setup
+        firebase_messaging_version = "20.2.3" //https://firebase.google.com/docs/cloud-messaging/android/client?hl=vi
+        firebase_core_version      = "17.4.4" //https://firebase.google.com/docs/cloud-messaging/android/client?hl=vi
+        firebase_analytics_version = "17.2.2" //https://firebase.google.com/docs/cloud-messaging/android/client?hl=vi
+
+        round_corner_version = "2.0.3" //https://github.com/akexorcist/Android-RoundCornerProgressBar
+        circle_progress_version = "1.0.4" //https://github.com/yankai-victor/Loading
+
+        block_ads_version = "3.0" //https://github.com/adblockplus/libadblockplus-android
+
+        apache_version = "3.11" // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    }
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
