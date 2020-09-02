@@ -2,9 +2,7 @@ package com.chukimuoi.tikitest.injection.module
 
 import android.app.Application
 import android.content.Context
-import com.chukimuoi.tikitest.data.online.BannerApi
-import com.chukimuoi.tikitest.data.online.FlashDealApi
-import com.chukimuoi.tikitest.data.online.QuickLinkApi
+import com.chukimuoi.tikitest.data.online.TikiApi
 import com.chukimuoi.tikitest.data.online.interceptor.AppInterceptor
 import com.chukimuoi.tikitest.injection.ApplicationContext
 import com.google.gson.FieldNamingPolicy
@@ -22,7 +20,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 
 
 @Module
@@ -74,13 +71,13 @@ object NetworkModule {
             .build()
     }
 
-    @Provides @Named("Banner")
+    @Provides
     @Reusable
     @JvmStatic
-    internal fun provideRetrofitInterfaceBanner(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    internal fun provideRetrofitInterface(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(BannerApi.BASE_URL)
+            .baseUrl(TikiApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
@@ -89,50 +86,7 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideBannerApi(@Named("Banner") retrofit: Retrofit): BannerApi {
-        return retrofit.create(BannerApi::class.java)
+    internal fun provideApi(retrofit: Retrofit): TikiApi {
+        return retrofit.create(TikiApi::class.java)
     }
-
-    @Provides @Named("FlashDeal")
-    @Reusable
-    @JvmStatic
-    internal fun provideRetrofitInterfaceFlashDeal(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(FlashDealApi.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .build()
-    }
-
-    @Provides
-    @Reusable
-    @JvmStatic
-    internal fun provideFlashDealApi(@Named("FlashDeal") retrofit: Retrofit): FlashDealApi {
-        return retrofit.create(FlashDealApi::class.java)
-    }
-
-    @Provides @Named("QuickLink")
-    @Reusable
-    @JvmStatic
-    internal fun provideRetrofitInterfaceQuickLink(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(QuickLinkApi.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .build()
-    }
-
-    @Provides
-    @Reusable
-    @JvmStatic
-    internal fun provideQuickLinkApi(@Named("QuickLink") retrofit: Retrofit): QuickLinkApi {
-        return retrofit.create(QuickLinkApi::class.java)
-    }
-
-
-
-
-
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@color/bg_text_search"
+                android:centerColor="@color/bg_text_search"
+                android:endColor="@color/bg_text_search"
+                android:type="linear" />
+            <corners
+                android:radius="@dimen/radius_main"/>
+            <stroke
+                android:width="@dimen/stroke_main"
+                android:color="@color/bg_text_search" />
+        </shape>
+    </item>
+</selector>

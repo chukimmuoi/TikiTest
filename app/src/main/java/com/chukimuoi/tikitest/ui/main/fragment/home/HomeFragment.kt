@@ -10,6 +10,7 @@ import com.chukimuoi.tikitest.databinding.FragmentHomeBinding
 import com.chukimuoi.tikitest.ui.main.MainActivity
 import com.chukimuoi.tikitest.utils.extensions.inflate
 import com.chukimuoi.tikitest.utils.extensions.injectViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * @author  : Chu Kim Muoi
@@ -52,7 +53,9 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun createVariableView(view: View?, savedInstanceState: Bundle?) {
-
+        swipeContainer.setOnRefreshListener {
+            viewModel.getBannerAndQuickLink()
+        }
     }
 
     override fun createVariableNormal(savedInstanceState: Bundle?) {

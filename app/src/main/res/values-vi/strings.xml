@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TikiTest</string>
+
+    <string name="hint_search">Bạn tìm gì hôm nay...</string>
+</resources>

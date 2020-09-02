@@ -6,4 +6,6 @@
 
     <color name="colorImageNormal">#E0E0E0</color>
     <color name="colorImageSelect">#4FC3F7</color>
+
+    <color name="bg_text_search">#FFFFFF</color>
 </resources>
