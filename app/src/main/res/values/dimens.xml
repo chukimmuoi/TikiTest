@@ -4,4 +4,7 @@
 
     <dimen name="radius_main">4dp</dimen>
     <dimen name="stroke_main">1.2dp</dimen>
+
+    <dimen name="home_item_marginTop">8dp</dimen>
+    <dimen name="banner_layout_height">128dp</dimen>
 </resources>

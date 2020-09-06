@@ -34,6 +34,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.chukimmuoi.mbase.viewpager.LockableViewPager
+                android:id="@+id/bannerPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_layout_height"
+                android:layout_marginTop="@dimen/home_item_marginTop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:visibility="gone"/>
+
+            <com.developers.chukimmuoi.indicator.IndicatorView
+                android:id="@+id/viewIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/bannerPager"
+                app:layout_constraintEnd_toEndOf="@+id/bannerPager"
+                app:layout_constraintStart_toStartOf="@+id/bannerPager" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.chukimmuoi.mbase.swipe.BaseSwipeRefreshLayout>
