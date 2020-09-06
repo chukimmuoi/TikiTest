@@ -16,6 +16,7 @@ import com.chukimuoi.tikitest.ui.main.MainActivity
 import com.chukimuoi.tikitest.ui.main.fragment.banner.adapter.BannerAdapter
 import com.chukimuoi.tikitest.utils.extensions.inflate
 import com.chukimuoi.tikitest.utils.extensions.injectViewModel
+import com.developers.chukimmuoi.indicator.PagesLessException
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -185,6 +186,12 @@ class HomeFragment : BaseFragment() {
 
             }
         })
+
+        try {
+            viewIndicator.setViewpager(bannerPager)
+        } catch (e: PagesLessException) {
+            e.printStackTrace()
+        }
     }
 
     private fun loadChangeImage(index: Int) {

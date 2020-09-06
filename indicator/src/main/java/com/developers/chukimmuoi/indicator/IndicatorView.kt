@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 
@@ -184,8 +185,8 @@ class IndicatorView : View, IndicatorInterface, ViewPager.OnPageChangeListener {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        for (i in 0 until mDots.size) {
-            mDots[i].draw(canvas)
+        for (element in mDots) {
+            element.draw(canvas)
         }
     }
 

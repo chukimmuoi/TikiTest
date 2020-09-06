@@ -87,9 +87,6 @@ data class FlashDeal(
             val urlPath: String = ""
         ) {
             fun getPercentDiscount() : String {
-                Timber.e("LOL ====> discount = $discount")
-                Timber.e("LOL ====> listPrice = $listPrice")
-                Timber.e("LOL ====> discount / listPrice = ${(discount * 100) / listPrice}")
                 return "-${(discount * 100) / listPrice}%"
             }
 
