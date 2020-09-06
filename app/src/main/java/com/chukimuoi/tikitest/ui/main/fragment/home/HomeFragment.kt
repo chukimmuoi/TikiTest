@@ -16,7 +16,6 @@ import com.chukimuoi.tikitest.ui.main.MainActivity
 import com.chukimuoi.tikitest.ui.main.fragment.banner.adapter.BannerAdapter
 import com.chukimuoi.tikitest.utils.extensions.inflate
 import com.chukimuoi.tikitest.utils.extensions.injectViewModel
-import com.developers.chukimmuoi.indicator.PagesLessException
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -66,8 +65,11 @@ class HomeFragment : BaseFragment() {
             viewModel.getBannerAndQuickLink()
         }
 
+        initQuickLinkRecycle()
+
         initBannerStatus()
         initBannerSessionStatus()
+        initQuickLinkStatus()
     }
 
     override fun createVariableNormal(savedInstanceState: Bundle?) {
@@ -84,6 +86,7 @@ class HomeFragment : BaseFragment() {
                             val size = mobileUrls.size
                             if (size > 0) {
                                 bannerPager.visible()
+
                                 displayBannerPager(mobileUrls)
                                 viewModel.loadBannerSession(size)
                             } else {
@@ -111,6 +114,41 @@ class HomeFragment : BaseFragment() {
         )
     }
 
+    private fun initQuickLinkStatus() {
+        viewModel.loadQuickLinkStatus.observe(
+            this,
+            Observer {
+                when (it.status) {
+                    Resource.Status.NEXT -> {
+                        it.data?.let {
+                            val data = it.data
+                            val size = data.size
+                            if (size > 0) {
+                                quickLinkRecycler.visible()
+
+                                viewModel.quickLinkAdapter.setListItem(data[0])
+                                viewModel.quickLinkAdapter.setListener {
+
+                                }
+                            } else {
+                                quickLinkRecycler.gone()
+                            }
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+    private fun initQuickLinkRecycle() {
+        binding.quickLinkRecycler.initGridLayoutManager(
+            space = 0,
+            spanCount = 2,
+            itemWidth = resources.getDimensionPixelSize(R.dimen.item_quick_link_layout_size),
+            isHorizontal = true,
+            isReverse = false)
+    }
+
     private fun displayBannerPager(list: List<String>) {
         adapter = BannerAdapter(childFragmentManager, list)
         bannerPager.offscreenPageLimit = 3
@@ -128,12 +166,6 @@ class HomeFragment : BaseFragment() {
 
             }
         })
-
-        try {
-            viewIndicator.setViewpager(bannerPager)
-        } catch (e: PagesLessException) {
-            e.printStackTrace()
-        }
     }
 
     private fun loadChangeImage(index: Int) {

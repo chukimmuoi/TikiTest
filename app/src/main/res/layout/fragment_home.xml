@@ -33,7 +33,7 @@
                 android:hint="@string/hint_search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.chukimmuoi.mbase.viewpager.LockableViewPager
                 android:id="@+id/bannerPager"
@@ -42,21 +42,18 @@
                 android:layout_marginTop="@dimen/home_item_marginTop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                android:visibility="gone"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <com.developers.chukimmuoi.indicator.IndicatorView
-                android:id="@+id/viewIndicator"
+            <com.chukimmuoi.mbase.recycle.BaseRecycleView
+                android:id="@+id/quickLinkRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/bannerPager"
-                app:layout_constraintEnd_toEndOf="@+id/bannerPager"
-                app:layout_constraintStart_toStartOf="@+id/bannerPager" />
+                android:layout_height="@dimen/quick_link_layout_height"
+                android:layout_marginTop="@dimen/home_item_marginTop"
+                app:adapter="@{viewModel.quickLinkAdapter}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bannerPager" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.chukimmuoi.mbase.swipe.BaseSwipeRefreshLayout>

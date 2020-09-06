@@ -8,6 +8,7 @@ import com.chukimuoi.tikitest.model.Banner
 import com.chukimuoi.tikitest.model.FlashDeal
 import com.chukimuoi.tikitest.model.QuickLink
 import com.chukimuoi.tikitest.ui.base.BaseViewModel
+import com.chukimuoi.tikitest.ui.main.fragment.home.adapter.QuickLinkAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -31,8 +32,10 @@ class HomeViewModel
     private val subscription by lazy { CompositeDisposable() }
 
     @Inject lateinit var tikiRepository: TikiRepository
+    @Inject lateinit var quickLinkAdapter: QuickLinkAdapter
 
-    val loadBannerStatus = MutableLiveData<Resource<Banner>>()
+    val loadBannerStatus        = MutableLiveData<Resource<Banner>>()
+    val loadQuickLinkStatus     = MutableLiveData<Resource<QuickLink>>()
     val loadBannerSessionStatus = MutableLiveData<Resource<Int>>()
 
     lateinit var banner: Banner
@@ -45,6 +48,8 @@ class HomeViewModel
     }
 
     init {
+        quickLinkAdapter.setListItem(listOf())
+
         getBannerAndQuickLink()
     }
 
@@ -64,6 +69,7 @@ class HomeViewModel
                         quickLink = it.second
 
                         loadBannerStatus.postValue(Resource.next(banner))
+                        loadQuickLinkStatus.postValue(Resource.next(quickLink))
                     },
                     onComplete = {
                         Timber.e("BannerAndQuickLink: onComplete")
