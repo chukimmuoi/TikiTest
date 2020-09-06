@@ -2,4 +2,7 @@
     <string name="app_name">TikiTest</string>
 
     <string name="hint_search">Bạn tìm gì hôm nay...</string>
+
+    <string name="title_sold">Đã bán %1$s</string>
+    <string name="title_just_opened_for_sale">Vừa mở bán</string>
 </resources>

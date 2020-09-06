@@ -4,12 +4,12 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="270"
-                android:startColor="#039BE5"
-                android:centerColor="#FFFFFF"
-                android:endColor="#FFFFFF"
+                android:startColor="#8AE57373"
+                android:centerColor="#8AE57373"
+                android:endColor="#8AE57373"
                 android:type="linear" />
             <corners
-                android:radius="@dimen/radius_main"/>
+                android:radius="16dp"/>
             <stroke
                 android:width="@dimen/stroke_main"
                 android:color="@color/bg_text_search" />

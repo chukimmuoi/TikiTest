@@ -3,7 +3,7 @@
     <dimen name="image_bar_size">32dp</dimen>
 
     <dimen name="radius_main">4dp</dimen>
-    <dimen name="stroke_main">1.2dp</dimen>
+    <dimen name="stroke_main">0dp</dimen>
 
     <dimen name="home_item_marginTop">8dp</dimen>
     <dimen name="banner_layout_height">128dp</dimen>
@@ -11,4 +11,8 @@
     <dimen name="quick_link_layout_height">200dp</dimen>
     <dimen name="item_quick_link_layout_size">96dp</dimen>
     <dimen name="item_quick_link_margin_top">8dp</dimen>
+
+    <dimen name="flash_deal_layout_height">192dp</dimen>
+
+    <dimen name="progress_size">48dp</dimen>
 </resources>

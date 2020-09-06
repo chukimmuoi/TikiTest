@@ -8,6 +8,7 @@ import com.chukimuoi.tikitest.model.Banner
 import com.chukimuoi.tikitest.model.FlashDeal
 import com.chukimuoi.tikitest.model.QuickLink
 import com.chukimuoi.tikitest.ui.base.BaseViewModel
+import com.chukimuoi.tikitest.ui.main.fragment.home.adapter.FlashDealAdapter
 import com.chukimuoi.tikitest.ui.main.fragment.home.adapter.QuickLinkAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,10 +34,12 @@ class HomeViewModel
 
     @Inject lateinit var tikiRepository: TikiRepository
     @Inject lateinit var quickLinkAdapter: QuickLinkAdapter
+    @Inject lateinit var flashDealAdapter: FlashDealAdapter
 
     val loadBannerStatus        = MutableLiveData<Resource<Banner>>()
-    val loadQuickLinkStatus     = MutableLiveData<Resource<QuickLink>>()
     val loadBannerSessionStatus = MutableLiveData<Resource<Int>>()
+    val loadQuickLinkStatus     = MutableLiveData<Resource<QuickLink>>()
+    val loadFlashDealStatus     = MutableLiveData<Resource<FlashDeal>>()
 
     lateinit var banner: Banner
     lateinit var quickLink: QuickLink
@@ -49,6 +52,7 @@ class HomeViewModel
 
     init {
         quickLinkAdapter.setListItem(listOf())
+        flashDealAdapter.setListItem(listOf())
 
         getBannerAndQuickLink()
     }
@@ -60,6 +64,7 @@ class HomeViewModel
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe {
                     Timber.e("BannerAndQuickLink: onSubscribe")
+                    loadBannerStatus.postValue(Resource.loading())
                 }
                 .subscribeBy(
                     onNext = {
@@ -69,11 +74,9 @@ class HomeViewModel
                         quickLink = it.second
 
                         loadBannerStatus.postValue(Resource.next(banner))
-                        loadQuickLinkStatus.postValue(Resource.next(quickLink))
                     },
                     onComplete = {
                         Timber.e("BannerAndQuickLink: onComplete")
-                        getFlashDeal()
                     },
                     onError = {
                         Timber.e("BannerAndQuickLink: onError $it")
@@ -82,18 +85,21 @@ class HomeViewModel
         )
     }
 
-    private fun getFlashDeal() {
+    fun getFlashDeal() {
         subscription.add(
-            tikiRepository.getFlashDeal().observeOn(AndroidSchedulers.mainThread())
+            tikiRepository.getFlashDeal()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe {
                     Timber.e("FlashDeal: onSubscribe")
+                    loadFlashDealStatus.postValue(Resource.loading())
                 }
                 .subscribeBy(
                     onNext = {
                         Timber.e("FlashDeal: onNext $it")
 
                         flashDeal = it
+                        loadFlashDealStatus.postValue(Resource.next(flashDeal))
                     },
                     onComplete = {
                         Timber.e("FlashDeal: onComplete")

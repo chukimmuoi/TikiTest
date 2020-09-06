@@ -26,6 +26,7 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/bg_text_search"
                 android:drawableLeft="@drawable/ic_baseline_search_24"
                 android:drawablePadding="8dp"
@@ -42,7 +43,18 @@
                 android:layout_marginTop="@dimen/home_item_marginTop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+            <com.victor.loading.rotate.RotateLoading
+                android:id="@+id/loadingBanner"
+                android:layout_width="@dimen/progress_size"
+                android:layout_height="@dimen/progress_size"
+                app:loading_color="#039BE5"
+                app:loading_width="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/bannerPager"
+                app:layout_constraintStart_toStartOf="@+id/bannerPager"
+                app:layout_constraintBottom_toBottomOf="@+id/bannerPager"
+                app:layout_constraintTop_toTopOf="@+id/bannerPager"/>
 
             <com.chukimmuoi.mbase.recycle.BaseRecycleView
                 android:id="@+id/quickLinkRecycler"
@@ -53,6 +65,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bannerPager" />
+
+            <com.victor.loading.rotate.RotateLoading
+                android:id="@+id/loadingQuickLink"
+                android:layout_width="@dimen/progress_size"
+                android:layout_height="@dimen/progress_size"
+                app:loading_color="#039BE5"
+                app:loading_width="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/quickLinkRecycler"
+                app:layout_constraintStart_toStartOf="@+id/quickLinkRecycler"
+                app:layout_constraintBottom_toBottomOf="@+id/quickLinkRecycler"
+                app:layout_constraintTop_toTopOf="@+id/quickLinkRecycler"/>
+
+            <com.chukimmuoi.mbase.recycle.BaseRecycleView
+                android:id="@+id/flashDealRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flash_deal_layout_height"
+                android:layout_marginTop="@dimen/home_item_marginTop"
+                app:adapter="@{viewModel.flashDealAdapter}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/quickLinkRecycler" />
+
+            <com.victor.loading.rotate.RotateLoading
+                android:id="@+id/loadingFlashDeal"
+                android:layout_width="@dimen/progress_size"
+                android:layout_height="@dimen/progress_size"
+                app:loading_color="#039BE5"
+                app:loading_width="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/flashDealRecycler"
+                app:layout_constraintStart_toStartOf="@+id/flashDealRecycler"
+                app:layout_constraintBottom_toBottomOf="@+id/flashDealRecycler"
+                app:layout_constraintTop_toTopOf="@+id/flashDealRecycler"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

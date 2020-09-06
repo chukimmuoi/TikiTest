@@ -66,10 +66,12 @@ class HomeFragment : BaseFragment() {
         }
 
         initQuickLinkRecycle()
+        initFlashDealRecycle()
 
         initBannerStatus()
         initBannerSessionStatus()
         initQuickLinkStatus()
+        initFlashDealStatus()
     }
 
     override fun createVariableNormal(savedInstanceState: Bundle?) {
@@ -80,6 +82,9 @@ class HomeFragment : BaseFragment() {
             this,
             Observer {
                 when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingBanner.start()
+                    }
                     Resource.Status.NEXT -> {
                         it.data?.let {
                             val mobileUrls = it.data.map { it.mobileUrl }
@@ -92,6 +97,13 @@ class HomeFragment : BaseFragment() {
                             } else {
                                 bannerPager.gone()
                             }
+                            loadingBanner.stop()
+                            loadingBanner.gone()
+                        }
+
+                        viewModel.loadQuickLinkStatus.apply {
+                            postValue(Resource.loading())
+                            postValue(Resource.next(viewModel.quickLink))
                         }
                     }
                 }
@@ -119,6 +131,9 @@ class HomeFragment : BaseFragment() {
             this,
             Observer {
                 when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingQuickLink.start()
+                    }
                     Resource.Status.NEXT -> {
                         it.data?.let {
                             val data = it.data
@@ -128,12 +143,16 @@ class HomeFragment : BaseFragment() {
 
                                 viewModel.quickLinkAdapter.setListItem(data[0])
                                 viewModel.quickLinkAdapter.setListener {
-
+                                    // TODO: Click action.
                                 }
                             } else {
                                 quickLinkRecycler.gone()
                             }
+                            loadingQuickLink.stop()
+                            loadingQuickLink.gone()
                         }
+
+                        viewModel.getFlashDeal()
                     }
                 }
             }
@@ -145,7 +164,8 @@ class HomeFragment : BaseFragment() {
             space = 0,
             spanCount = 2,
             isHorizontal = true,
-            isReverse = false)
+            isReverse = false
+        )
     }
 
     private fun displayBannerPager(list: List<String>) {
@@ -169,5 +189,42 @@ class HomeFragment : BaseFragment() {
 
     private fun loadChangeImage(index: Int) {
         bannerPager.setCurrentItem(index, true)
+    }
+
+    private fun initFlashDealStatus() {
+        viewModel.loadFlashDealStatus.observe(
+            this,
+            Observer {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        loadingFlashDeal.start()
+                    }
+                    Resource.Status.NEXT -> {
+                        it.data?.let {
+                            val data = it.data
+                            val size = data.size
+                            if (size > 0) {
+                                flashDealRecycler.visible()
+
+                                viewModel.flashDealAdapter.setListItem(data)
+                                viewModel.flashDealAdapter.setListener {
+                                    // TODO: Click action.
+                                }
+                            } else {
+                                flashDealRecycler.gone()
+                            }
+                            loadingFlashDeal.stop()
+                            loadingFlashDeal.gone()
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+    private fun initFlashDealRecycle() {
+        binding.flashDealRecycler.initLinearLayoutManager(
+            space = 0,
+            isHorizontal = true)
     }
 }

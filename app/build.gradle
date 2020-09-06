@@ -89,6 +89,8 @@ dependencies {
 
     implementation "org.greenrobot:eventbus:$rootProject.eventbus_version"
 
+    implementation "com.victor:lib:$rootProject.circle_progress_version"
+    implementation 'com.danilomendes.progressbar:progressbar:1.0.2'
 }
 
 def configApkFileName(variant, defaultConfig) {

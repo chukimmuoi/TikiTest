@@ -1,7 +1,10 @@
 package com.chukimuoi.tikitest.model
 
 
+import android.content.Context
+import com.chukimuoi.tikitest.R
 import com.google.gson.annotations.SerializedName
+import timber.log.Timber
 
 data class FlashDeal(
     @SerializedName("data")
@@ -83,6 +86,13 @@ data class FlashDeal(
             @SerializedName("url_path")
             val urlPath: String = ""
         ) {
+            fun getPercentDiscount() : String {
+                Timber.e("LOL ====> discount = $discount")
+                Timber.e("LOL ====> listPrice = $listPrice")
+                Timber.e("LOL ====> discount / listPrice = ${(discount * 100) / listPrice}")
+                return "-${(discount * 100) / listPrice}%"
+            }
+
             data class Inventory(
                 @SerializedName("fulfillment_type")
                 val fulfillmentType: String = "",
@@ -102,7 +112,15 @@ data class FlashDeal(
             val qtyRemain: Int = 0,
             @SerializedName("status")
             val status: String = ""
-        )
+        ) {
+            fun getOrdered(context: Context): String {
+                return if (qtyOrdered > 0) {
+                    String.format(context.resources.getString(R.string.title_sold), qtyOrdered)
+                } else {
+                    context.resources.getString(R.string.title_just_opened_for_sale)
+                }
+            }
+        }
     }
 
     data class Tab(
