@@ -117,6 +117,10 @@ data class FlashDeal(
                     context.resources.getString(R.string.title_just_opened_for_sale)
                 }
             }
+
+            fun getProgress(): Int {
+                return 100 - percent
+            }
         }
     }
 
