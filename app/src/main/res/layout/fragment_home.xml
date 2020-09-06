@@ -43,17 +43,18 @@
                 android:layout_marginTop="@dimen/home_item_marginTop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:visibility="gone"/>
 
             <com.developers.chukimmuoi.indicator.IndicatorView
                 android:id="@+id/viewIndicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:background="#000000"
                 app:layout_constraintBottom_toBottomOf="@+id/bannerPager"
                 app:layout_constraintEnd_toEndOf="@+id/bannerPager"
-                app:layout_constraintStart_toStartOf="@+id/bannerPager" />
+                app:layout_constraintStart_toStartOf="@+id/bannerPager"
+                android:visibility="gone" />
 
             <com.victor.loading.rotate.RotateLoading
                 android:id="@+id/loadingBanner"

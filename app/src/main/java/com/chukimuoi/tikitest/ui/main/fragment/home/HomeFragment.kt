@@ -84,6 +84,7 @@ class HomeFragment : BaseFragment() {
             Observer {
                 when (it.status) {
                     Resource.Status.LOADING -> {
+                        bannerPager.visible()
                         loadingBanner.start()
                     }
                     Resource.Status.NEXT -> {
@@ -92,11 +93,13 @@ class HomeFragment : BaseFragment() {
                             val size = mobileUrls.size
                             if (size > 0) {
                                 bannerPager.visible()
+                                viewIndicator.visible()
 
                                 displayBannerPager(mobileUrls)
                                 viewModel.loadBannerSession(size)
                             } else {
                                 bannerPager.gone()
+                                viewIndicator.gone()
                             }
                             loadingBanner.stop()
                             loadingBanner.gone()
