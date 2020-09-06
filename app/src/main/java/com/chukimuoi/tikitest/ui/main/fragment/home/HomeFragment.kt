@@ -144,7 +144,6 @@ class HomeFragment : BaseFragment() {
         binding.quickLinkRecycler.initGridLayoutManager(
             space = 0,
             spanCount = 2,
-            itemWidth = resources.getDimensionPixelSize(R.dimen.item_quick_link_layout_size),
             isHorizontal = true,
             isReverse = false)
     }
